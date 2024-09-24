@@ -4,6 +4,12 @@ on:
   release:
     types:
       - published
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
 
 jobs:
   publish:
@@ -24,7 +30,10 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: pip install -r requirements.lock
+        run: rye sync --no-lock
+      
+      - name: Build
+        run: rye build
 
       # - name: Publish
-      #   run: poetry publish --build --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
+      #   run: rye publish --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}

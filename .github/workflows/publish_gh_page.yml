@@ -34,7 +34,7 @@ jobs:
         run: pip install -r requirements.lock
       
       - name: Build Jaffle Shop dbt docs
-        run: dbt deps && dbt docs generate --static
+        run: dbt deps && dbtmu init && dbt docs generate --static
 
       - name: Rename static_index.html to index.html
         run: mv ./target/static_index.html ./target/index.html
