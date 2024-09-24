@@ -4,12 +4,6 @@ on:
   release:
     types:
       - published
-  pull_request:
-    branches:
-      - main
-    types:
-      - opened
-      - synchronize
 
 jobs:
   publish:
@@ -35,5 +29,5 @@ jobs:
       - name: Build
         run: rye build
 
-      # - name: Publish
-      #   run: rye publish --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
+      - name: Publish
+        run: rye publish --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
