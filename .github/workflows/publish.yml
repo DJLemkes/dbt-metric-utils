@@ -1,0 +1,30 @@
+name: Publish
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install the latest version of rye
+        uses: eifinger/setup-rye@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: ".python-version"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.lock
+
+      # - name: Publish
+      #   run: poetry publish --build --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
