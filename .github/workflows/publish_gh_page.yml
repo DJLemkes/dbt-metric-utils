@@ -13,7 +13,7 @@ on:
 
 defaults:
   run:
-    working-directory: jaffle_shop
+    working-directory: jaffle-shop
 
 jobs:
   build_and_deploy_github_pages:
@@ -27,7 +27,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: "jaffle_shop/.python-version"
+          python-version-file: "jaffle-shop/.python-version"
           cache: pip
 
       - name: Install dependencies
@@ -43,6 +43,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: "./jaffle_shop/target"
+          publish_dir: "./jaffle-shop/target"
           keep_files: true
           publish_branch: github-pages
