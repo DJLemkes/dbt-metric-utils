@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 from typing import Dict, List, Tuple
 
 import yaml
@@ -34,8 +35,8 @@ def dbt_metric_utils_materialize(
         metric_names=metrics,
         group_by_names=group_by,
         limit=limit,
-        time_constraint_start=time_start,
-        time_constraint_end=time_end,
+        time_constraint_start=datetime.strptime(time_start, "%Y-%m-%d") if time_start else None,
+        time_constraint_end=datetime.strptime(time_end, "%Y-%m-%d") if time_end else None,
         where_constraint=where,
         order_by_names=order_by,
     )
